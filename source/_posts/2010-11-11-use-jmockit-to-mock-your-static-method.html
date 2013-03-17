@@ -1,0 +1,79 @@
+---
+layout: post
+title: use jmockit to mock your static method
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p>Mockup always comes to us when we try to break system dependency. The conventional mockup frameworks only allowed us to mock instance methods. So the <strong>static methods usually become to the death of testability</strong>.</p>
+
+<p>Of course, we still have some way to make it become testable.</p>
+
+<p>1. If the static methods invoke only happens in few classes, we could <strong>create an adaptor to isolate</strong> them. The implementation of adaptor is just simply delegation.</p>
+
+<p>2. Unfortunately, sometimes your legacy system maybe full of static methods calling, they scatter in different tiers.</p>
+
+<p>It indeed a bad smell, but before you refactor them, you may need to make them testable firstly. Now, jmockit comes to us.</p>
+
+<p>"Tests can easily be written that will <strong>mock final classes, static methods, constructors</strong>, and so on. There are no limitations."</p>
+
+<p>-- jmockit</p>
+
+<p>The following example shows its ability to mock static methods.</p>
+
+<p>//src file</p>
+
+<p>public class ServiceFactory {</p>
+
+<p>public static String getAService() {</p>
+
+<p>return "real service";</p>
+
+<p>}</p>
+
+<p>}</p>
+
+<p>//test file</p>
+
+<p>import mockit.Mock;</p>
+
+<p>import mockit.Mockit;</p>
+
+<p>import static org.junit.Assert.assertEquals;</p>
+
+<p>import org.junit.Test;</p>
+
+<p>public class ServiceFactoryTest {</p>
+
+<p>@Test</p>
+
+<p>public void should_return_mock_service() {</p>
+
+<p>Mockit.setUpMock(ServiceFactory.class, ServiceFactoryStub.class);</p>
+
+<p>assertEquals("mock service", ServiceFactory.getAService());</p>
+
+<p>}</p>
+
+<p>private static class ServiceFactoryStub {</p>
+
+<p>@Mock</p>
+
+<p>public static String getAService() {</p>
+
+<p>return "mock service";</p>
+
+<p>}</p>
+
+<p>}</p>
+
+<p>}</p>
+
+<p><strong>Caution:</strong></p>
+
+<p>Make sure jmockit.jar appears before any JUnit jar file in the classpath. Otherwise, it will shows warning:</p>
+
+<p>"WARNING: JMockit was initialized on demand, which may cause certain tests to fail;<br />
+please check the documentation for better ways to get it initialized."</p>

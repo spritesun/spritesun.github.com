@@ -1,0 +1,37 @@
+---
+layout: post
+title: Emacs下安装elisp包的常用方法
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p><font style="font-weight: bold" size="5">小</font><br />
+比较小型的elisp文件，一般可以直接下载到.el文件，放到你的elisp文件目录。<br />
+然后修改.emacs文件<br />
+<blockquote><font style="color: #666666">;;把引号内的替换成你的.el文件所在目录就可以了，所有目录下的.el和.elc文件都在require范围之内。</font><br />
+(add-to-list 'load-path "~/.elisp/enable-lisp/")</blockquote><br />
+接着<br />
+<blockquote><font style="color: #666666">;;把'后的替换成你的.el文件</font><br />
+(require 'php-mode)</blockquote><br />
+这样就基本设置好了，大部分功能都会加载了。<br />
+<br />
+<font style="font-weight: bold" size="5">大</font><br />
+对于大型的elisp包，你下载到的一般是一个压缩包，比如.tar.gz或者.zip。<br />
+1.先解压<br />
+2.编译<br />
+<a href="http://java-sun.blogspot.com/2007/04/emacs23tramp219.html">前几天配过一个tramp</a>。最近装多了以后，发现方法都大同小异。<br />
+<blockquote>$./configure --with-contrib --with-emacs<br />
+$make<br />
+$make DESTDIR=/tmp install</blockquote><br />
+然后把目标被编译到了/tmp，一般有两个文件夹，一个是site-lisp，另一个是texi或者叫info。<br />
+3.加载<br />
+site-lisp的加载方法还是采用上面提到的<br />
+<blockquote><font style="color: #666666">;;把引号内的替换成你的.el文件所在目录就可以了，所有目录下的.el和.elc文件都在require范围之内。</font><br />
+(add-to-list 'load-path "~/.elisp/tramp/lisp")</blockquote><br />
+texi的加载方法（其实texi的加载不是必要的，他主要是一些帮助文件)<br />
+<blockquote>(add-to-list 'Info-default-directory-list "~/.elisp/tramp/texi/")</blockquote><br />
+然后require就好了。<br />
+最后推荐<br />
+<blockquote>$make clean</blockquote></p>

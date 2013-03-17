@@ -1,0 +1,24 @@
+---
+layout: post
+title: 看了一点《The science of debugging》
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p><strong>The Science of debugging</strong>的中文名又叫《程序调试思想与实践》<br />
+<br />
+看了几天，感觉这本书有点难，反正没有相当的编程经验也就不会理解debug之痛苦，也就不好理解debug science。<br />
+<br />
+1。对书中Pentium FDIV bug这个例子印象比较深，这里提醒我们要注意测试的完备性，因为我们很难测试到程序的每一行代码，所以测试单元的设计就很值得注意。<br />
+<br />
+其他好多例子都有点看不太懂，都是些从实际工作中找出来的真实的bug案例，我对企业的电子应用系统部署还不太清楚，不知道到底在实际应用中这些组件是如何innerconnect的，所以在他带领我找寻bug原因的一步步分析时就有点晕了。<br />
+<br />
+2。软件模块重用带来的bug，这一点还有点经历。对于自己以前写的东西太自信，而由于重用后外部环境已经改变。一些内在的bug就在新程序里触发了。<br />
+<br />
+3。还有一个也有经历。不要将修复bug弄成了伪装bug，而是要找出其根源。很多时候，程序由于不断的debug而造成结构越来越混乱，最后无法维护。最好是采用回溯设计，将bug在设计层次消除，而非外加一个方便的类，在最简单的地方将程序的结构剥离。<br />
+<br />
+这些都是看了前面讲的bug案例，然后联系我自己的理解能力总结出来的，书的下一段会告诉我们如何设计debug方案。<br />
+<br />
+<strong><font color="#cc0000">ps.现在想用wordpress和blogger的博克平台，唉。。。。</font></strong></p>

@@ -1,0 +1,58 @@
+---
+layout: post
+title: Test ApplicationController with stub action in RSpec2.3 and Rails3
+categories:
+- Note
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p><div /></p>
+
+<p>When I try to test application controller with RSpec, the most difficult part is that I always get a routing error, for there is no real action method in application controller.</p>
+
+<p>The newest RSpec gives you a way to stub an action, this will add related route automatically.</p>
+
+<p>Here is the source code from RSpec, you could search with "def controller(".
+<a title="https://github.com/rspec/rspec-rails/blob/master/lib/rspec/rails/example/controller_example_group.rb" href="https://github.com/rspec/rspec-rails/blob/master/lib/rspec/rails/example/controller_example_group.rb" target="_blank">https://github.com/rspec/rspec-rails/blob/master/lib/rspec/rails/example/controller_example_group.rb</a></p>
+
+<p>There is an example which shows you how to test your custom exception handling, like 404, 500 rendering logic in application controller,</p>
+
+<p>
+<code>
+require 'spec_helper'</code></p>
+
+<p><code>describe ApplicationController do<br />
+[ActiveRecord::RecordNotFound, ActionController::RoutingError, ActionController::UnknownController, ActionController::UnknownAction].each do |exception|<br />
+describe "handling #{exception} exceptions" do<br />
+controller do<br />
+# use eval here for exception variable scope issue<br />
+eval(%Q(def index; raise #{exception}, 'exception message';end))<br />
+end</code></p>
+
+<p>it "redirects to custom 404 page" do<br />
+get :index<br />
+response.should render_template('static_pages/404')<br />
+response.status.should == 404<br />
+end<br />
+end<br />
+end</p>
+
+<p>describe "handling other exceptions" do<br />
+controller do<br />
+def index<br />
+raise ArgumentError, "exception message"<br />
+end<br />
+end</p>
+
+<p></p>
+
+<p><code> it "redirects to custom 500 page" do<br />
+get :index<br />
+response.should render_template('static_pages/500')<br />
+response.status.should == 500<br />
+end<br />
+end<br />
+end
+</code></p>

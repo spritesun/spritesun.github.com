@@ -1,0 +1,32 @@
+---
+layout: post
+title: 话说gnome下workspace切换的小缺陷以及gnome的发音
+categories:
+- 闲燕碎雨
+tags: []
+published: true
+comments: true
+---
+<p>众所周知，邪恶的windows桌面系统（请允许我这样称呼）是没有workspace的概念的，而xwindows中是有的。我们可以看到gnome,kde,xfce,<a href="http://www.icewm.org/">icewm</a>,<a href="http://sawmill.sourceforge.net/">sawfish</a>等 等等等，都是有workspace的，而默认的在相邻workspace间切换的快捷键是Ctrl+Alt+Left/Right（方向键），当然 Ctrl+Alt+1,2,3,4可以用来直接定位，但是我们这里先撇开直接叮问这个情况。我个人而言是习惯用相邻关系来定位的（比如editor位于 console和debuger间），而不是1永远放某一类窗口。<br />
+<br />
+假如现在你有4个workspace，那么我们可以通过hotkey从1=&gt;2,2=&gt;3,3=&gt;4，<font style="font-weight: bold">问题出现了</font>，我想从4=&gt;1（或者1=&gt;4)怎么办呢，在gnome下路径是这样的，你需要先从4=&gt;3,然后3=&gt;2,最后2=&gt;1，多麻烦阿～～～<br />
+我们试着把他做成一个环（1=&gt;2=&gt;3=&gt;4=&gt;1），那么只需要在4 workspace按下Ctrl+Alt+Right就回到1 worksapce了，怎么样，生产率提高了吧？<br />
+其实这是个很小的细节，但是个人感觉workspace切换操作的执行频率很高，所以还是挺重要的。<br />
+<font style="font-weight: bold">workspace不应只是一个平铺的画卷，而是一个立体的环。<br />
+</font>当你在使用gnome下使用华丽的beryl时，就不会有这个问题了，因为桌面3D了。但是若仅仅为了这一个点而使用beryl那么性能损失太大了（至少我以前一直是由于这个原因使用beryl）。<br />
+其实这个问题只是一个3D的思想而已，在2D桌面下同样可以十分方便的实现的。<br />
+后来我试用了<a href="http://www.icewm.org/">icewm</a>和<a href="http://sawmill.sourceforge.net/">sawfish</a>，发现他们都是支持4=&gt;1的切换的，<font style="font-weight: bold">3D思想与性能无关</font>～<br />
+<br />
+p.s.<br />
+以前一直将gnome念为ge no mu，可许多又这样念ge nu mu，今天查了一下字典，发现这个词并不发g的音，<font style="font-weight: bold">正确的发音：<br />
+</font><br />
+<blockquote>&lt;--- XDICT英汉辞典 ---&gt;<br />
+gnome<br />
+[noum]<br />
+n. 格言,箴言,侏儒,土地神<br />
+&lt;--- 朗道英汉字典5.0 ---&gt;<br />
+gnome<br />
+*[nәum]<br />
+n. 格言, 箴言, 侏儒, 土地神</blockquote><br />
+恩，要改习惯了<font style="font-weight: bold"><br />
+</font></p>

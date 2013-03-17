@@ -1,0 +1,100 @@
+---
+layout: post
+title: 试用RMI plugin for Eclipse
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p><a href="http://www.genady.net/rmi/v20/index.html"><font size="4">http://www.genady.net/rmi/v20/index.html</font></a><br />
+<br />
+<font color="#cc0000">上面的地址是RMI plug-in for Eclipse Version2.0的官方网页，提供了2.0版的下载，以及一点安装和使用说明。</font><br />
+<br />
+今天看到matrix上的这个广告，试用了一番。2.0版是官方最新的版本，作为Eclipse的插件，它同时支持Eclipse3.1.2和Eclipse3.2两个版本，兼容上做的还挺不错的。<br />
+<br />
+首先当然是把这个插件插上我们的Eclipse平台，这个不是啥问题，但这里我还是想说一下，在Eclipse的插件管理上，推荐大家养成良好的习 惯。虽然现在高版本的Eclipse对插件是能够自动识别并启用，可这个直接解压到plugins和features的方法，并不利于我们管理，随着插件 的不端增加，你的eclipse会变得越来越庞大，不易维护。这个和做软件是一个道理。我比较推荐的是<font color="#ff0000">采用<span>Manage Configuration<font color="#000000">来管理，但这种安装插件的方法会需要你额外的写一个</font><font color="#1f2029"><span>.eclipseextension</span><span>文件来共Manage Configuration来识别。详细的方法，参照这篇文章里介绍的方法二，当然方法三也不错。<font color="#000099">资料地址</font>：<a href="http://www.cnblogs.com/bjlimeng/archive/2006/04/02/365055.html">http://www.cnblogs.com/bjlimeng/archive/2006/04/02/365055.html</a></span></font></span></font><br />
+<br />
+<font color="#ff0000"><span><font color="#1f2029"><span></span></font></span></font><br />
+<br />
+<font color="#ff0000"><span><font color="#1f2029"><span>安装好以后，你可以检查你的Debug和Run功能里是不是多了一个RMI Application。</span></font></span></font><br />
+<br />
+<font color="#ff0000"><span><font color="#1f2029"><span>一般我们做RMI的应用和其他应用的区别主要是两点：</span></font></span></font><br />
+<br />
+<span></span><span><font color="#ff0000">1.start rmiregistry，默认的端口是1099</font></span><br />
+<br />
+<span></span><span><font color="#ff0000">2.rmic(rmi complie)那个实现 Remote接口的具体子接口 的类，从而生成stub（stub,skeleton）的.class文件。</font></span><br />
+<br />
+<font color="#ff0000"><span><font color="#1f2029"><span>关于stub，这里要多说一 点，在jdk的低版本里（似乎是1.3以下），我们通过rmic得到的是stub和skeleton两个文件，一个放在server端，一个放在 client端。稍微高一点版本用rmic得到的只有一个stub文件，它可以同时用于server和client。而在jdk5.0里其实是支持动态加 载stub的，也就是说我们可以不用显示的编译得到stub文件，然后布置到c,s两端。而是jvm利用 proxy模式帮我们在运行时动态的加载处理了，具体的原理请参见SUN的官方解释。但是我们在实际应用时，并不推荐不生成stub文件，依赖jvm帮 忙，原因之一是生成stub文件，可以在程序报错时更明确带给我们错误的信息。用官方的说法也就是<font color="#ff0000">creating them is still useful</font>。这里有一个插件供应FAQ论坛提供的说法：</span></font></span></font><br />
+<br />
+<font color="#ff0000"><span><font color="#1f2029"><span></span><span class="postbody">The simple answer would be "no, you don't have to", but the real answer is more complex and it is "no, but you should". If you generate the RMI stubs yourself you will discover some RMI errors that otherwise you would discover only at runtime.<br />
+<br />
+After many years since the original release, Sun realized that the stub and skeleton files are not really needed for RMI programs.<br />
+Leaving skeletons aside (not needed since JDK 1.2) let's talk about stubs.<br />
+The RMI stubs are the "client side" component that pretend to be local "server side" classes, but actually delegate all their methods to the server.<br />
+<br />
+The RMI stubs only depend on the remote interfaces implemented by the remote class and they don't depend on the implementation of the remote class. The only reason why the 'rmic' compiler needs the remote class implementation is to find out what remote interfaces it implements.<br />
+(I will try to write more on how it works later, meanwhile all the details can be found in Sun's RMI reference documents).<br />
+<br />
+So if the stubs only depend on the remote interfaces and not on the remote class implementation, the stubs always look pretty much the same. Generating them on the server side and loading them on the client side is redundant. Indeed, in Java 5.0 a <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/reflect/Proxy.html" class="postlink" target="_blank"><font color="#006699">Proxy</font></a> is used to generate the stubs on the fly on the client side. The RMI implementation know exactly which interfaces the remote object implements and using the Proxy class it can create the same code that delegates method calls to the server machine at runtime, which it does.<br />
+<br />
+However, remote interfaces have some restrictions. For example, every method in the remote interface must delcare throwing a RemoteException.<br />
+The RMI compiler (rmic) can detect such problem and issue an error.<br />
+If the RMI compiler isn't used, you will get the following error when you try to bind a remote object to the registry:<br />
+</span></font></span></font><br />
+<table align="center" border="0" cellpadding="3" cellspacing="1" width="90%" /><br />
+<tr /><br />
+<td><span class="genmed"><strong><font color="#000000">Code:</font></strong></span></td><br />
+<br />
+<tr /><br />
+<td class="code"><font color="#ff0000"></font><font style="background-color: #ffffff"></font><font color="#333333">Something wrong happended on the remote end<br />
+java.rmi.server.ExportException: remote object implements illegal remote interface; nested exception is:<br />
+java.lang.IllegalArgumentException: illegal remote method encountered: public abstract java.lang.String demo.rmi.printers.server.RemotePrinter.getPrinterStatus()<br />
+at sun.rmi.server.UnicastServerRef.exportObject(UnicastServerRef.java:171)<br />
+at java.rmi.server.UnicastRemoteObject.exportObject(UnicastRemoteObject.java:293)<br />
+...........<br />
+Caused by: java.lang.IllegalArgumentException: illegal remote method encountered: public abstract public abstract java.lang.String demo.rmi.printers.server.RemotePrinter.getPrinterStatus() </font><br />
+</td><br />
+<br />
+<br />
+<span class="postbody"><font color="#ff0000"></font><font color="#1f2029"><br />
+<br />
+So, if you want to discover this error earlier, generating the RMI stubs will help to achieve it.</font><br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029"> </font><br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029">介于以上的两个不同点，我们平时用Eclipse来开发RMI Application并不是很方便。</font><br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029">而RMI plugin很好的解决了第一个问题，提供的相关功能包括：</font><br />
+<ul /><font color="#ff0000"></font><font color="#1f2029"><br />
+	<li><font color="#ff0000">start local registry</font></li><br />
+	<li><font color="#ff0000">stop local registry</font></li><br />
+	<li><font color="#ff0000">restart...</font></li><br />
+	<li><font color="#ff0000">clean...</font></li><br />
+	<li><font color="#ff0000">inspect...</font></li><br />
+</font><br />
+<font color="#ff0000"></font><font color="#1f2029">当中的Inpect RMI Registry功能提供了对当前registry中</font><font color="#ff0000">registred objects, class hierarchy, Available methods</font>几个数据的监控。用起来感觉特别清晰。<br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029">有时候插件内部有点错误可能会无法stop registry，这时候提示要你手动的kill registry，一般我采用windows任务管理器手动关闭rmiregistry进程的方法。</font><br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029">第二个是rmic的问题，默认的方法就是利用jdk5.0动态生成stub的特性。</font><font color="#ff0000">如果开发者想要显示的生成stub，可以右击工程，然后选择RMI-&gt;Enable Stubs Generation，这样一来程序会自动检测生成stub文件,通过Disable Stubs Generation就可以删除Stub文件。</font><font color="#ff0000">插件主要做的就是在将应用程序显示的作为RMI Application调试时，通过一个codebase的特性来加载stub文件,</font>具体关于codebase的说法请参见官方的例子<a href="http://www.genady.net/rmi/v20/docs/tutorials/print_server.html">http://www.genady.net/rmi/v20/docs/tutorials/print_server.html</a><br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029"> </font><br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029">所以插件的主要功能都体现在debug(run)上。直接调试是不行的，我们除了显示的选择作为RMI Application调试以外，</font><font color="#ff0000">主要要设置的是RMI VM Properties中的java.security.policy（安全策略）和java.rmi.server.codebase(所基于的代码)两个属性。</font>两个属性一般都可以用单纯的用滑鼠电击生成。<br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029">第一个属性中安全策略可以自动生成默认的安全策略，然 后加载即可。第二个属性，我们只需要添加这个应用程序运行所必需关联的工程即可(我们一般的应用程序都是位于一个project中，不存在外部引用问题， 而做典型的rmi应用包括server,common,client三个部分，这里的server的codebase就是server,common两个 project所在的文件夹,而client则是client,common)，特别注意的是要将stub所在的文件夹和主程序自身的文件夹添加进来。</font><br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029"></font><font color="#ff0000">总结调试RMI application的一般步骤，start local registry，然后debug-RMI Application，设置RMI VM属性，然后Debug即可。</font>服务端和客户端的调试是相同的道理和步骤。<br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029">核心的操作就是以上说的。</font><br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029">另外说一下其他的功能。</font><br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029">通过new-other，我们可以在java-rmi下生成常用的rmi程序模版，这个功能还行，不过本省模版的代码量就很小，所以不用也行。</font><br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029">插件还提供了一个比较强大实用的高级功能——</font><font color="#ff0000">RMI Spy，这个功能很不错，和inspector配合起来监控可以对RMI运行的许多细节深入跟踪。</font>具体参见：<a href="http://www.genady.net/rmi/v20/docs/spy/index.html">http://www.genady.net/rmi/v20/docs/spy/index.html</a><br />
+<br />
+<font color="#ff0000"></font><font color="#1f2029">总体感觉还行。插件应该可以说是轻量级的，对原来的project不需要怎么改动，就可以通过RMI plugin来调试。</font><br />
+<br />
+</span></p>

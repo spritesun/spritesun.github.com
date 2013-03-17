@@ -1,0 +1,52 @@
+---
+layout: post
+title: Emacs23下安装Tramp2.1.9的注意
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p><p xmlns="http://www.w3.org/1999/xhtml"><br />
+<blockquote>TRAMP 代表"Transparent Remote (file) Access, Multiple Protocol"，他是 Emacs 的一个用于远程文件编辑的扩展包。</blockquote><br />
+网上很多安装使用方法都比较旧了，弄的我折腾了好久。（又是折腾，我这些天都被折腾死了）<br />
+<big><strong>1.下载</strong></big><br />
+一定要去<a href="http://ftp.gnu.org/gnu/tramp/">GNU的FTP</a>下载，sourceforge上也有一个，但是连版本号都没有。<br />
+<br />
+<strong><big>2.编译</big></strong><br />
+首先设置选项<br />
+<blockquote>./configure --with-contrib --with-emacs</blockquote><br />
+如果是编译到/usr/share/emacs/site-lisp目录下就用这句<br />
+<blockquote>./configure --prefix=/usr</blockquote><br />
+如果是想放到自己的目就要用其他的参数了，贴我的例子<br />
+<blockquote>./configure --with-lispdir=$HOME/.elisp/tramp/lisp --infodir=$HOME/.elisp/tramp/texi</blockquote><br />
+设置好了，编译吧<br />
+<blockquote>make install</blockquote><br />
+（其实也可以用<em>make DESTDIR=/tmp install</em>来安装到临时目录，然后把lisp和info的文件拷贝到自己常用的相应目录）<br />
+<big><strong>3.配置</strong></big><br />
+直接贴我的配置文件吧，大家看着改吧。<br />
+<blockquote>;;Tramp<br />
+;;tramp elisp文件的所在目录<br />
+(add-to-list 'load-path "~/.elisp/tramp/lisp/")<br />
+;;tramp info文件的所在目录<br />
+(add-to-list 'Info-default-directory-list "~/.elisp/tramp/texi/")<br />
+;;指定默认方法，很多人喜欢用scp，我比较偏爱ssh。<br />
+(setq tramp-default-method "ssh")<br />
+;;指定默认用户<br />
+;;指定默认主机<br />
+(setq tramp-default-user "gabriel"      tramp-default-host "202.117.7.222")<br />
+(setq tramp-auto-save-directory "~/tmp/emacs/tramp/")<br />
+(setq auto-save-file-name-transforms<br />
+'(("\\`/[^/]*:\\(.+/\\)*\\(.*\\)" "~/tmp/emacs/tramp/\\2")))<br />
+;;注意最好设置到500以下<br />
+(setq tramp-chunksize 328)<br />
+;;这里特别写一条ange-ftp的原因是ange-ftp和tramp会有点冲突，但如果使用require先ange-ftp再tramp的方式就可以避免.<br />
+(require 'ange-ftp)<br />
+(require 'tramp)</blockquote><br />
+<big><strong>4.使用</strong></big><br />
+使用的方法就是<br />
+<blockquote>C-x C-f</blockquote><br />
+然后<br />
+<blockquote>/username@hostname:/fileaddress</blockquote><br />
+第一次访问的时候会自动提示你输入密码的。<br />
+tramp支持Tab键自动补全，真美。</p></p>

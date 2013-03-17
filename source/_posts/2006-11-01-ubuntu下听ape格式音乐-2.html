@@ -1,0 +1,36 @@
+---
+layout: post
+title: ubuntu下听APE格式音乐
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p>测试环境：<br />
+ubuntu6.06 dapper<br />
+应该在debian下也能成功<br />
+（之前用那种编译mac和xmms-mac的方法一直没成功。)<br />
+<br />
+以前一直是将ape转成flac再听很麻烦。<br />
+ape格式音乐的解码方式似乎是非开源的，所以一般开源软件都不支持。<br />
+<br />
+1.下载xmms<br />
+sudo apt-get install xmms<br />
+这个官方的源就行了，至于解决xmms菜单乱码的办法网上有很多，不难。<br />
+我用的版本是1.2.10版本。<br />
+<br />
+2.下载ape for xmms插件<br />
+<a href="http://202.117.1.8:8080/linux/M.1162354208.A/547/xmms-ape-plugin.tar">xmms-ape-plugin.tar</a> (235520 字节)<br />
+<br />
+3.解压<br />
+tar -xvf xmms-ape-plugin.tar<br />
+<br />
+4.安装<br />
+sudo dpkg -i mac_3.99-u4-b4-1_i386.deb<br />
+sudo dpkg -i xmms-mac_0.3.1-1_i386.deb<br />
+<br />
+然后就可以了。<br />
+<br />
+可以用linux听我的好多ape格式音乐以后，除了玩游戏，其他都可以脱离windows了，真好。<br />
+我爱古典。</p>

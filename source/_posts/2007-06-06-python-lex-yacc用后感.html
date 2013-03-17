@@ -1,0 +1,154 @@
+---
+layout: post
+title: Python Lex Yacc用后感
+categories:
+- Note
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p>这次是做一个Pascal的词法分析的实验作业，题目要求比较简单，自己做的时候也比较偷懒，保留字都没写全，这个东西写多了其实挺费体力的。</p>
+
+<p><a href="http://www.dabeaz.com/ply/">PLY(python-lex-yacc)</a>框架还是很好用的。</p>
+
+<p>一开始打算用ruby写，好不容易弄懂了<a href="http://raa.ruby-lang.org/project/ruby-lex/">ruby-lex</a>的使用，可是却由于生成的ruby代码不完全，不能解释通过。<br />
+由于ruby-lex的机制是调用了本地lex操作命令，生成中间c代码，所以或许问题出我的本地<br />
+flex上，或许也是项目本身的问题吧。<br />
+介于ruby-lex项目已经多年没有人维护了，所以就没一直折腾下去了。</p>
+
+<p>然后想到x8x的<a href="http://rubyforge.org/projects/aurum/">Aurum</a>，Aurum is a LALR(n) parser generator written in Ruby.<br />
+作为parser当然也包括lexical的分析过程。但下午写的时候x8x不在线，又没有文档，对比example，遇到问题还是甚多，故放弃了。<br />
+不过用DSL写出的正规和EBNF着实漂亮。<br />
+例如:</p>
+
+<p>[code:ruby]</p>
+
+<p>_terminals (string(';') | string("n")).one_or_more<br />
+argument argument, '+', argument {argument.s_exp = [:call, argument1.s_exp, :+,<br />
+[:array, argument2.s_exp]]}</p>
+
+<p>[/code]</p>
+
+<p><!--more-->接着想到linux chen以前的建议，说lisp做lexical analyzer挺方便。决定用lisp写，找到cl-lexer框架，可怜没有文档，例子都通过不。</p>
+
+<p>就如此折腾了很久。</p>
+
+<p>最后觉得还是用python的lexical analyzer写了，python在complier领域的支持比ruby要丰富很<br />
+多，很快找到了全面的文档和例子，于是一小会而就搞定了。</p>
+
+<p>经过此次后感觉ruby社区里大都是web,DSL的项目，而python的社区覆盖领域相对更丰富些<br />
+。</p>
+
+<p>附源码:</p>
+
+<p>[code:python]</p>
+
+<p>#!/usr/bin/python<br />
+#coding=utf8<br />
+#Time-stamp: &lt;gabriel 06/15/2007 19:32:46&gt;</p>
+
+<p>import ply.lex as lex<br />
+import sys</p>
+
+<p># List of token names.   This is always required<br />
+tokens = (<br />
+'VAR', 'INT', 'BEGIN', 'END', 'PROCEDURE', #保留字<br />
+'COMMA', 'COLON', 'SEMI', 'LPAREN', 'RPAREN', #分隔符<br />
+'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'ASSIGN', #运算符<br />
+'ID', #标识符<br />
+'CONST', #常量<br />
+)</p>
+
+<p>t_VAR = 'VAR'<br />
+t_INT = 'INT'<br />
+t_BEGIN = 'BEGIN'<br />
+t_END = 'END'<br />
+t_PROCEDURE = 'PROCEDURE'</p>
+
+<p>reserved_words = (t_VAR, t_INT, t_BEGIN, t_END, t_PROCEDURE)</p>
+
+<p>t_COMMA = r','<br />
+t_COLON = r':'<br />
+t_SEMI = r';'<br />
+t_LPAREN = r'('<br />
+t_RPAREN = r')'</p>
+
+<p>t_PLUS = r'+'<br />
+t_MINUS = r'-'<br />
+t_TIMES = r'*'<br />
+t_DIVIDE = r'/'<br />
+t_ASSIGN = r':='</p>
+
+<p>def t_ID(t):<br />
+r'([_A-Za-z])+'<br />
+if reserved_words.__contains__(t.value): #保留字要特别处理<br />
+t.type = t.value.upper()<br />
+return t</p>
+
+<p>def t_CONST(t):<br />
+r'([0-9])+'<br />
+try:<br />
+t.value = int(t.value)<br />
+except ValueError:<br />
+print "Line %d: Number %s is too large!" % (t.lineno,t.value)<br />
+t.value = 0<br />
+return t</p>
+
+<p>def t_newline(t):<br />
+r'n+'<br />
+t.lexer.lineno += len(t.value)</p>
+
+<p>t_ignore  = ' t'</p>
+
+<p>def t_error(t):<br />
+print "Illegal character '%s'" % t.value[0]<br />
+t.lexer.skip(1)</p>
+
+<p># 构建词法分析器<br />
+lex.lex()</p>
+
+<p>if (len(sys.argv) == 1):<br />
+print '''NAME:<br />
+Simple pascal lexical analyzer<br />
+USAGE:<br />
+./pacsal_lexer.py [FILE]...<br />
+AUTHOR:<br />
+Written by Gabriel From&nbsp;xjtu.'''<br />
+exit()<br />
+else:<br />
+datafile = open(sys.argv[1], 'r')<br />
+data = datafile.read()<br />
+datafile.close()</p>
+
+<p># Give the lexer some input<br />
+lex.input(data)</p>
+
+<p># Tokenize<br />
+print '''&lt;?xml version="1.0"?&gt;<br />
+&lt;root&gt;'''</p>
+
+<p>while 1:<br />
+tok = lex.token()<br />
+if not tok: break      # No more input<br />
+print "&lt;token lineno=%d string=\"%s\" type=%s&gt;&lt;/token&gt;" % (<br />
+tok.lineno, tok.value, tok.type)</p>
+
+<p>print '&lt;/root&gt;'</p>
+
+<p>[/code]</p>
+
+<p>测试数据data:</p>
+
+<p>[code:pascal]</p>
+
+<p>VAR x , y : INT ;<br />
+BEGIN<br />
+PROCEDURE main ( );<br />
+BEGIN<br />
+a := 10 ;<br />
+b := a + 20 ;<br />
+END<br />
+END</p>
+
+<p>[/code] </p>

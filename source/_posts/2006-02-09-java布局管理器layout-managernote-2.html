@@ -1,0 +1,37 @@
+---
+layout: post
+title: Java布局管理器(Layout Manager)Note
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p>首先是LayoutManager提供的接口方法：<br />
+<br />
+1、public void addLayoutComponent(String name, Component comp);<br />
+<br />
+2、public void removeLayoutComponent(Component comp);<br />
+<br />
+核心3、public Dimension preferredLayoutSize(Container container);<br />
+<br />
+4、public Dimension minimumLayoutSize(Container container);<br />
+<br />
+核心5、public void layoutContainer(Container container);<br />
+<br />
+第一个方法其实就是你在使用container.add(String name,component comp);时调用的方法，例如BorderLayout为布局管理器时。但在FlowLayout中由于没有其他的附加信息，所以不需要填充这个方法。<br />
+<br />
+相应的第二个方法也就不需要填充了。<br />
+<br />
+真 正核心的方法是第三个和第五个方法，前者是最终确定Container有多大的，而后者就是决定Container中各个小件的实际位置的了。也就是说， 当我们用container.setLayout(LayoutManager)后，再加入小件后，最后系统做的工作其实是LayoutManager. layoutContainer(container);和container.setSize(LayoutManager. PreferredLayoutSize(container));。<br />
+<br />
+然后讲几个常用Layout的特性，<br />
+<br />
+FlowLayout保持由他管理的容器上的控件的大小（应该是preferred size）,<br />
+<br />
+GridLayout从来不理会这些空间的大小，只是把控件完全填充由GridLayout划分的格子但是我们应该注意到GridLayout讲一个容器划分成等面积大小的格子，一次不适合我们以上的应用）。<br />
+<br />
+而BorderLayout对空间的控制介于以上两者之间。BorderLayout使放在NORTH和SOURTH的控件保持合适的高度，是放置在EAST和WEST的控件保持合适的宽度，使放在CENTER的控件占据剩余的所有空间。<br />
+最后是对于窗体大小改变的情况，<br />
+<br />
+GridLayout可以保证按钮全部在一排，但是当用户改变窗体大小时，会出现按钮过长或过短的情形。FlowLayout可以克服这个，但是缺点在于用户使宽度小于按钮的宽度和时，会使一些按钮不可见。</p>

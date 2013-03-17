@@ -1,0 +1,104 @@
+---
+layout: post
+title: 检讨：windows纸牌浅探
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p>浅探——浅度探索<span lang="EN-US"></span><br />
+<br />
+写这篇检讨之前我想到了老妈常提醒我生活中需要不断总结才能进步。<span lang="EN-US"></span><br />
+<br />
+<span lang="EN-US"></span><br />
+<br />
+前些日子刚刚完成了从<span lang="EN-US">c++</span>向<span lang="EN-US">java</span>的过渡，突然接到一个关于纸牌的<span lang="EN-US">project</span>，要我用<span lang="EN-US">c++</span>写，很是郁闷，<br />
+<br />
+<personname productid="和" w:st="on">和</personname>老师谈了一下，他说<span lang="EN-US">c++,java</span>双线实践也挺好，保持自己的优势，至于<span lang="EN-US">delphi</span>可以放弃，因为学的不深入，所以将来捡起来也不会吃力，再说通过<span lang="EN-US">c++ builder</span>的实践来学习<span lang="EN-US">vcl library</span>也不错。于是我决定借助这个机会练习一下<span lang="EN-US">C++,Stack,Array in DataStructrue ,VCL</span>。<span lang="EN-US"></span>突然忘了表白，我是个菜鸟，不是很菜的鸟，想飞的很高很高鸟，虽然菜，我一直认为飞得高和菜没有直接联系。<span lang="EN-US"></span><br />
+<br />
+<span lang="EN-US"></span><br />
+<br />
+刚开始接这个活的时候比较有信心，觉得一个星期应该可以搞定（由于自己寝室没有电脑，所以每天只能晚上工作）。因为之前刚看过<span lang="EN-US">Budd</span>先生的<strong><em><span lang="EN-US">An Introduction to Object-Oriented Programming(Third Editon)</span></em></strong>一书，然后当中有一个章节是以<span lang="EN-US">Klondike</span>纸牌游戏为案例进行分析的，当中提供了<span lang="EN-US">C Sharp</span>实现的<span lang="EN-US">Source Code</span>。要求的<span lang="EN-US">windows</span>纸牌区别在规则上的一些变化，以及<span lang="EN-US">GUI</span>的较高要求。<span lang="EN-US"></span><br />
+<br />
+<span lang="EN-US"></span><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><strong><span lang="EN-US">First Step</span></strong><span style="font-size: 15pt; color: red; font-family: 宋体-方正超大字符集" lang="EN-US">:</span></p><br />
+<br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 18pt; text-indent: -18pt"><span lang="EN-US">1.</span><span style="font-weight: normal; font-size: 7pt; line-height: normal; font-style: normal; font-variant: normal">      </span><span style="font-size: 12pt; font-family: 宋体-方正超大字符集">大量参考</span><span lang="EN-US">budd</span>先生关于<span lang="EN-US">Klondike,c#</span>的类型抽象方法，以及具体实现代码，分析了<span lang="EN-US">c#</span>和<span lang="EN-US">c++</span>在构思一般程序上的主要区别，然后再对书上的框架进行修改，至于一个<span lang="EN-US">c#</span>中类的静态构造函数如何在<span lang="EN-US">c++</span>里实现，没有想出比较完美的解决方案，然后也没有深入考虑（这成为了后来一系列问题的祸首），于是开始写代码。（<span lang="EN-US">c#</span>是完全面向对象的语言，而<span lang="EN-US">c++</span>不是）<span lang="EN-US"><br />
+</span>总结：这一部分我感觉叫做面向对象分析，主要参考了<strong><em><span lang="EN-US">An Introduction to OOP</span></em></strong>一书<span lang="EN-US"></span><br />
+</p><p class="MsoNormal" style="margin: 0cm 0cm 0pt 18pt; text-indent: -18pt"><span lang="EN-US">2.</span><span style="font-weight: normal; font-size: 7pt; line-height: normal; font-style: normal; font-variant: normal">      </span><span style="font-size: 12pt; font-family: 宋体-方正超大字符集">接下来可是做</span><span lang="EN-US">OOD</span>，也就是设计部分，说实话，我对<span lang="EN-US">OOA,</span>和<span lang="EN-US">OOD</span>本身也没有太好的区分。我把每一个类的方法名，成员名都写了出来，并画了一下他们的关系图。<span lang="EN-US">(</span>不是用<span lang="EN-US">UML</span>画的<span lang="EN-US">)</span></p><br />
+<span lang="EN-US"></span><br />
+<br />
+于是第一个步骤结束了，当时做完以后感觉很顺利，觉得接下来问题不大了，很快便开始了下一个步骤<span lang="EN-US"></span><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><strong><span lang="EN-US"></span></strong></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><strong><span lang="EN-US"></span></strong></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><strong><span lang="EN-US">Second Step:</span></strong><span style="font-size: 12pt; color: red; font-family: 宋体-方正超大字符集" lang="EN-US"></span></p><br />
+<br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 12pt; font-family: 宋体-方正超大字符集" lang="EN-US">1.</span><span style="font-size: 12pt; font-family: 宋体-方正超大字符集">开始写每个</span><span lang="EN-US">class</span>的实现<span lang="EN-US"><br />
+</span>这是一个痛苦而艰辛的过程，当然这是这个<span lang="EN-US">project</span>能够运行的核心部分，（后来明白了虽然是运行的核心，但不是成功的核心）首先困难的是写的过程，因为我实际写起来的时候才发现和当初设计还是有出入的，并且设计时没有解决好的问题在现在就越发体现出来，并且严重影响了<span lang="EN-US">project</span>的<span lang="EN-US">frame</span>，于是我边写边改，接着就越写越难，越改越难，这个难度就好像是随着我的代码量增大而增长一样，导致这个结果主要是因为我改的时候比较偷懒，没有想好在下手。本来没一个对象的分离关系是很好的，而改着改着就聚合的太厉害，关联复杂，于是直接影响的<span lang="EN-US">project</span>的可扩充性。一样一批之，我违背了<span lang="EN-US">oops</span>的思想。<span lang="EN-US"></span><br />
+</p><p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-size: 12pt; font-family: 宋体-方正超大字符集" lang="EN-US">2.</span><span style="font-size: 12pt; font-family: 宋体-方正超大字符集">其实我在写</span><span lang="EN-US">class</span>过程中已经意识到了事态的严重性，但是还是由于太懒，太急公近利，我舍不得从头做起，就这样一错再错。<span lang="EN-US"></span></p><br />
+我开始写交互的事件，这个过程本来是应该很简单的，但是由于之前各个<span lang="EN-US">class</span>的逻辑混乱性导致了难度的加大，这个步骤里难度主要在于图形界面的实现上的复杂性。我遇到了很多<span lang="EN-US">vcl</span>本身的问题，由于工期比较短，没有时间去仔细研究<span lang="EN-US">vcl</span>，后来我才知道一些我煞费周折才解决的问题，其实在库里是有很多现成的方法去实现的。比如我一直很郁闷：纸牌游戏中会涉及到图片的层叠现象，但是怎么改变图片的层次呢？简单<span lang="EN-US">show(),hint(),visable=true|false</span>显然是无法搞定的，于是我就………………（这里不想赘述），然后解决了，其实呢在<span lang="EN-US">Timage</span>里有方法<span lang="EN-US">bringtofront,sendtoback</span>直接可以调整图片在<span lang="EN-US">z</span>轴上的层次关系，（我有查<span lang="EN-US">help,</span>但是我想它应该是关于<span lang="EN-US">index</span>的一个东西，就没查到）。当我知道这一切的时候我郁闷了。<span lang="EN-US"></span><br />
+<br />
+终于我把交互部分写完。<span lang="EN-US"></span><br />
+<br />
+<span lang="EN-US"></span><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><strong><span lang="EN-US">Third Step:</span></strong><span style="font-size: 12pt; color: red; font-family: 宋体-方正超大字符集" lang="EN-US"></span></p><br />
+接下来就是一个<span lang="EN-US">debug</span>的问题，对于结构上已经错综复杂的一个<span lang="EN-US">project</span>，其<span lang="EN-US">debug</span>过程之痛苦是可想而知的，我觉得这唯一锻炼的就是我的<span lang="EN-US">debug</span>能力，不过的确是很有效果的，我感觉经历这件事情以后我的<span lang="EN-US">debug</span>能力上升了不上，对<span lang="EN-US">c++ builder</span>的调试功能也熟悉了不少（以前用的是<span lang="EN-US">eclipse</span>，自己感觉调试起来更舒服）。<span lang="EN-US"></span><br />
+<br />
+<span lang="EN-US"></span><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><strong><span lang="EN-US">Final:</span></strong><span style="font-size: 12pt; color: red; font-family: 宋体-方正超大字符集" lang="EN-US"></span></p><br />
+做完以上工作，工期已到，自己草草测试就交给了同学试玩，效果还不错，没有发现<span lang="EN-US">bug</span>。<span lang="EN-US"></span><br />
+<br />
+<span lang="EN-US"></span><br />
+<br />
+<span lang="EN-US"></span><br />
+<p align="center">尾声：</p><br />
+写完这个程序时，我已经试筋疲力尽，7个晚上基本都在搞这个project，虽然从用户的角度来看是基本完成要求了，但是每当我重新省视那些代码试，只有心痛的感觉。小小一个纸牌写了快2000行的代码，（虽然我把测试过程中注释的代码以及自动生成的部分代码算上了，减去也有1800）。在我现在看来，应该试可以该到1000行以内的，加上ImageList的利用，也许可以降到600。<br />
+<br />
+所以说我觉得相当失败，这和起初预计的效果简直是天壤之别。<br />
+<br />
+而这个project的严重不足<br />
+<br />
+1.     不具有维护性，包括代码可读性，以及功能添加升级上的<br />
+<br />
+2.     空间浪费严重，这个也有我c++没有学好的原因<br />
+<br />
+在写的过程中我曾经多次意识到自己的错误以及事态的严重，但是我在抉择，斗争之后，始终不舍得放弃自己辛辛苦苦写出来的那么多代码，于是一错到底！！！<br />
+<br />
+想到我还一直觉得自己对面向对象以及软件工程的思想理解的还不错，不禁严重的羞愧起来。<br />
+<br />
+教训：（时间问题，有些教训可能写在上文中了，没有列出）<br />
+<br />
+1.     以前写作文的时候，老师说叶圣陶先生说过，（或者鲁迅）对文章中和主题关联不紧密的部分，即使独立看来是十分不错的也要忍痛割爱，果断的delete。写程序同样是这个道理。对程序结构有影响的代码要果断delete，也许在局部看来是变的麻烦了，当用数据结构中时间复杂度增张的思想来看，局部的麻烦是因为你现在的project还很小，一但变大，差异就随之出现<br />
+<br />
+2.     分析的时候要全面，设计的时候要自习，不要担心太深入浪费时间，就想文中提到的，编码是能够运行的核心，而分析设计是成功的核心。<br />
+<br />
+3.     时刻考虑程序的扩展性，尽量写些无局部特殊性的对象。<br />
+<br />
+4．不要太急公近利（这个也许是针对我个人的毛病）<br />
+<br />
+花了一个小时来写这个东西，感觉不是很浪费。<br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt">继续我的飞行。<span lang="EN-US"></span></p><br />
+From BMY，和我的教训很像，例子更加生动<br />
+<br />
+<u>发信人: wyaunng (Learned a lot...), 信区: JavaPrimer<br />
+标  题: 呵呵，今天被教育了，写出来和大家共勉吧<br />
+发信站: 兵马俑BBS (Thu Nov 17 19:26:06 2005), 本站(202.117.1.8)</u><br />
+<u>做一个developer很容易，但是做一个好的developer就难上加难。</u><br />
+<br />
+<u>实现一个feature很容易，但是要实现的好，却很难。</u><br />
+<br />
+<u>就如同一间大房子，我们可以把冰箱放到厨房，但是发现厨房没有相应匹配的插座，而我们<br />
+又因为怕麻烦等等各种原因而没有重新在墙上安装一个插座....于是我们把冰箱放到卧室（<br />
+这样也能解决当时的问题啊，因为至少我们的冰箱可以用了，至少卧室墙上有我们想要的插<br />
+座....）</u><br />
+<br />
+<u>结果当时问题解决了，我们很高兴，但是过一段时间突然发现，冰箱的声音太大，我们从厨<br />
+房到卧室，取东西太麻烦等等等等的不方便，这个时候我们想重新走线的时候，才发现，厨<br />
+房已经堆放了很多东西，要在以前的位置安装插座很难很难了.....</u><br />
+<br />
+<u>如果现在因为怕麻烦而对整个工程的逻辑，模式没有好好理解，单方面从解决手上的<br />
+feature下手，以后会有很多麻烦，所以在做事之前，先要多思考，尤其从整个<br />
+archetecture的角度....</u><br />
+<br />
+欢迎大家把我的代码当作错误案例研究，届于篇幅，代码提供在下一篇文章.</p>

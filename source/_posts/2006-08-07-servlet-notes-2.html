@@ -1,0 +1,149 @@
+---
+layout: post
+title: Servlet Notes
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p><font color="#6633ff"></font><font size="5">From <em><strong>More Servlets and JavaServer Pages</strong></em></font> <br />
+<p style="margin: 0in; font-size: 10pt"><strong><span style="font-family: Verdana" lang="EN-US">1。classpath</span><span style="font-family: SimSun" lang="ZH-CN">中</span><span style="font-family: Verdana" lang="EN-US">.(dot)</span><span style="font-family: SimSun" lang="ZH-CN">的重要性</span><span style="font-family: Verdana" lang="EN-US">,</span></strong></p><br />
+<p style="margin: 0in; font-size: 10pt"><span style="font-family: Verdana" lang="EN-US">classpath</span><span style="font-family: SimSun" lang="ZH-CN">一定要将</span><span style="font-family: Verdana" lang="EN-US">top-level devlopment</span><span style="font-family: SimSun" lang="ZH-CN">目录</span><span style="font-family: Verdana" lang="EN-US">include</span><span style="font-family: SimSun" lang="ZH-CN">进来</span></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt"><strong><span style="font-family: SimSun" lang="ZH-CN">2。将</span><span style="font-family: Verdana" lang="EN-US">response.setContentType();</span><span style="font-family: SimSun" lang="ZH-CN">放在</span><span style="font-family: Verdana" lang="EN-US">out.println</span><span style="font-family: SimSun" lang="ZH-CN">之前</span></strong></p><br />
+<p style="margin: 0in; font-size: 10pt"><span style="font-family: SimSun" lang="ZH-CN">同样setHeader(),setState()也要放在document之前</span></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US"><strong>3。Use an HTML validator to check the syntax of pages that your servlets generate</strong></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">(<a href="http://validator.w3.org/">http://validator.w3.org/</a>)</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">(<a href="http://www.htmlhelp.com/tools/validator/">http://www.htmlhelp.com/tools/validator/</a>).</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt"><strong><span style="font-family: SimSun" lang="ZH-CN">4。写一个</span><span style="font-family: Verdana" lang="EN-US">Utility</span><span style="font-family: SimSun" lang="ZH-CN">方便</span><span style="font-family: Verdana" lang="EN-US">Servlet</span><span style="font-family: SimSun" lang="ZH-CN">的在繁琐的</span><span style="font-family: Verdana" lang="EN-US">HTML</span><span style="font-family: SimSun" lang="ZH-CN">构建</span></strong></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">public class ServletUtilities {</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">public static final String DOCTYPE =</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">"&lt;!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " +</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">"Transitional//EN\"&gt;";</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">public static String headWithTitle(String title) {</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">return(DOCTYPE + "\n" +</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">"&lt;HTML&gt;\n" +</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">"&lt;HEAD&gt;&lt;TITLE&gt;" + title + "&lt;/TITLE&gt;&lt;/HEAD&gt;\n");</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">}</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">...</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">}</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">5。ServletConfig getServletConfig(),</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">Class(ServletConfig).getInitParameter()</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US"><strong>6。web.xml 中的Registered name must be used.</strong></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun"><strong>7。关于HTML forms</strong></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">see Chapter 16 of Core Servlets and JavaServer Pages (available in PDF at</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun"><a href="http://www.moreservlets.com/">http://www.moreservlets.com</a>).</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US"><strong>8。doHead()是一个新特征</strong></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">Servlet API 2.3  New feature: doHead<span>  </span>method for more quickly get the HTTP headers,not the actual document.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US"><strong>9。SingleThreadModel 接口</strong></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">Your doGet and doPost methods must be careful to synchronize access to fields and other shared data.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">If you want to prevent this, you can hava your servlet implement the SingleThreadModel interface.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">But if will significantly hurt the performance.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">So, think twice before using the SingleThreadModel approach.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">Avoid implementing SingleThreadModel for high-traffic servlets. Use</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">explicit synchronized blocks instead.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US"><strong>10。destroy()的可靠性不高</strong></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">Don't count on destroy as the only mechanism for saving state to disk.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">Activities like hit counting or accumulating lists of cookie values that indicate special</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">access should also proactively write their state to disk periodically.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">11。 <span style="font-family: Verdana" lang="EN-US">moreservlets</span><span style="font-family: SimSun" lang="ZH-CN">的官方网站做的真难看，很乱</span></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun"><span style="font-family: SimSun" lang="ZH-CN"></span></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun"><span style="font-family: SimSun" lang="ZH-CN"><strong>12。 getParameter（）是大小写敏感的</strong></span></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun"><span style="font-family: SimSun" lang="ZH-CN">The values supplied to getParameter and getParameterValues are case sensitive.</span></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun"><span style="font-family: SimSun" lang="ZH-CN"></span></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun"><span style="font-family: SimSun" lang="ZH-CN"><strong>13。  获取所有参数的方法</strong></span></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun"><span style="font-family: SimSun" lang="ZH-CN">getParameternames to get the list, then use getParameter or getParameterValues.</span></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun"><span style="font-family: SimSun" lang="ZH-CN"></span></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun"><span style="font-family: SimSun" lang="ZH-CN"> </span></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US"><strong>14。关于getReader()和getParameter()的冲突</strong></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">If you read the POST data by calling getReader or getInputStream on the HttpServletRequest, it might no longer be found by getParameter.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">  所以Do not use getParameter when you also call getInputStream and read</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">the raw servlet input.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US"><strong>15。过滤从request传入的value中的html表识符</strong></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">Filter out the<span>  </span>HTML-specific characters such as "&lt;" before inserting the values into the page.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US"><strong>16。广告商常用来跟踪链接源的referer技术</strong></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">Referer: This header indicates the URL of the referring Web page. All major browsers set this header, so it is a useful way of tracking where requests come from. This capability it helpful for tracking advertisers who refer people to your site. Don't rely too heavily on it since it can easily be spoofed by a custom client. Note: this header is Referer, not the expected Referrer (due to a spelling mistake by one of the original HTTP authors).</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US"><strong>17。 Understanding HTTP 1.1 Request Headers这一节特别晦涩</strong></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt"><strong><span style="font-family: Verdana" lang="EN-US">18。关于Traditonal CGI variables </span><span style="font-family: SimSun" lang="ZH-CN">查阅</span><span style="font-family: Verdana" lang="EN-US">Chapter2.6</span></strong></p><br />
+<p style="margin: 0in; font-size: 10pt"><span style="font-family: SimSun" lang="ZH-CN">其中主要是通过</span><span style="font-family: Verdana" lang="EN-US">HttpServletRequest</span><span style="font-family: SimSun" lang="ZH-CN">中的方法以及</span><span style="font-family: Verdana" lang="EN-US">this.getServletContext()</span><span style="font-family: SimSun" lang="ZH-CN">中的方法来获取</span><span style="font-family: Verdana" lang="EN-US">.</span></p><br />
+<p style="margin: 0in; font-size: 10pt"><span style="font-family: Verdana" lang="EN-US"></span></p><br />
+<p style="margin: 0in; font-size: 10pt"><span style="font-family: Verdana" lang="EN-US"><strong>19。 调用setStatus()先于out.println()</strong></span></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">Set status codes before sending any document content to the client.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US"><strong>20. 关于status-code的参考</strong></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">RFC2616:</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">Status-Code =</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">"100" ; Section 10.1.1: Continue</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "101" ; Section 10.1.2: Switching Protocols</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "200" ; Section 10.2.1: OK</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "201" ; Section 10.2.2: Created</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "202" ; Section 10.2.3: Accepted</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "203" ; Section 10.2.4: Non-Authoritative Information</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "204" ; Section 10.2.5: No Content</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "205" ; Section 10.2.6: Reset Content</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "206" ; Section 10.2.7: Partial Content</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "300" ; Section 10.3.1: Multiple Choices</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "301" ; Section 10.3.2: Moved Permanently</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "302" ; Section 10.3.3: Found</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "303" ; Section 10.3.4: See Other</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "304" ; Section 10.3.5: Not Modified</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "305" ; Section 10.3.6: Use Proxy</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "307" ; Section 10.3.8: Temporary Redirect</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "400" ; Section 10.4.1: Bad Request</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "401" ; Section 10.4.2: Unauthorized</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "402" ; Section 10.4.3: Payment Required</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "403" ; Section 10.4.4: Forbidden</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "404" ; Section 10.4.5: Not Found</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "405" ; Section 10.4.6: Method Not Allowed</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "406" ; Section 10.4.7: Not Acceptable</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "407" ; Section 10.4.8: Proxy Authentication Required</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "408" ; Section 10.4.9: Request Time-out</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "409" ; Section 10.4.10: Conflict</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "410" ; Section 10.4.11: Gone</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "411" ; Section 10.4.12: Length Required</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "412" ; Section 10.4.13: Precondition Failed</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "413" ; Section 10.4.14: Request Entity Too Large</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "414" ; Section 10.4.15: Request-URI Too Large</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "415" ; Section 10.4.16: Unsupported Media Type</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "416" ; Section 10.4.17: Requested range not satisfiable</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "417" ; Section 10.4.18: Expectation Failed</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "500" ; Section 10.5.1: Internal Server Error</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "501" ; Section 10.5.2: Not Implemented</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "502" ; Section 10.5.3: Bad Gateway</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "503" ; Section 10.5.4: Service Unavailable</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "504" ; Section 10.5.5: Gateway Time-out</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| "505" ; Section 10.5.6: HTTP Version not supported</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">| extension-code</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun"><strong>21.还是statuscode</strong></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">• 100–199 Codes in the 100s are informational, indicating that the client should respond</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">with some other action.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">• 200–299 Values in the 200s signify that the request was successful.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">• 300–399 Values in the 300s are used for files that have moved and usually include a</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">Location header indicating the new address.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">• 400–499 Values in the 400s indicate an error by the client.</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">• 500–599 Codes in the 500s signify an error by the server.</p><br />
+<p style="margin: 0in; font-size: 10pt"><strong><span style="font-family: SimSun" lang="ZH-CN">22.具体的各种</span><span style="font-family: Verdana" lang="EN-US">state</span><span style="font-family: SimSun" lang="ZH-CN">说明可以查阅</span><span style="font-family: Verdana" lang="EN-US">P87-92</span><span style="font-family: SimSun" lang="ZH-CN">页</span></strong></p><br />
+<p style="margin: 0in; font-size: 10pt"><strong><span style="font-family: SimSun" lang="ZH-CN"></span></strong></p><br />
+<p style="margin: 0in; font-size: 10pt"><span style="font-family: SimSun" lang="ZH-CN"><strong>23.</strong> <strong><span style="font-family: SimSun" lang="ZH-CN">关于</span><span style="font-family: Verdana" lang="EN-US">HTTP1.1 response Headers</span><span style="font-family: SimSun" lang="ZH-CN">可以查阅Chpater</span><span style="font-family: Verdana" lang="EN-US">2.8</span></strong></span></p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: SimSun">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US">&nbsp;</p><br />
+<p style="margin: 0in; font-size: 10pt; font-family: Verdana" lang="EN-US"><font color="#ff6600" face="Arial, Helvetica, sans-serif" size="4">以上是截至到Chapter2里Cookie之前的笔记,做自己参考.若是能给其他人提供方便，十分乐意。</font></p></p>

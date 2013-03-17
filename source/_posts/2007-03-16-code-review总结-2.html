@@ -1,0 +1,74 @@
+---
+layout: post
+title: code review总结
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p>发信人: spritesun (美就是生产力), 信区: JavaAdvanced<br />
+标  题: 关于code的一点心得<br />
+发信站: 兵马俑BBS (Sat Mar 17 04:17:26 2007), 本站(202.117.1.8)<br />
+<br />
+今天给别人做code review,生平第一次评价别人的代码，恩，还是蛮有心得的。<br />
+这里我就说一些比较有共性的体会了。总体可能偏向agile一些。<br />
+<br />
+1，不要用“华丽”的注释<br />
+//-----------------------------------------------------------<br />
+//---------------public method-------------------------------<br />
+//-----------------------------------------------------------<br />
+首先，这些注释是完全没有意义。其次对齐这些符号真的很累阿～<br />
+<br />
+2，最小化注释，文档，理论上来说，一个class是需要一个说明性的注释的（简单的可以不<br />
+要，编码者是有智商的)，<br />
+而对于每一个方法而言，是不是需要注释的，因为只要方法的职责划分恰当，并且方法的命<br />
+名也比较make sense的话，<br />
+我们是可以无需注释的阅读的。代码是最好的注释。<br />
+<br />
+3，注意命名艺术，主要注意的是类，方法，变量，test case的命名。命名直接影响可读性<br />
+，代替注释。这个和第2题是相承的。<br />
+<br />
+4，去熟悉java native class，学java不仅仅是学语法。当然熟悉jdk是一个漫长的过程。<br />
+重要的是你要具有足够的敏感性，<br />
+能够猜到jdk里应该会有一个如何如何的类能满足你的要求。<br />
+<br />
+5，少用静态的方法，那是不OO的做法<br />
+<br />
+6，迪米特法则，所有的都是private，必须时才开放。<br />
+<br />
+7，表达式里尽量不要用数值，数值应该是作为constant的。no magic number<br />
+<br />
+8，尽量不用System.out.println，用logging去代替它。<br />
+<br />
+9，[我错了]<br />
+<br />
+10.多使用泛型，它带来了type safe，很好。同时很多jdk5,6的new features也应该去熟悉<br />
+，了解。<br />
+<br />
+<br />
+That's all.<br />
+<br />
+回复[x8x]<br />
+<br />
+<span class="details"><br />
+汗，同学...<br />
+<br />
+public class Calculator ｛<br />
+       static class SingletonHolder {<br />
+               static Calculator instance = new Calculator();<br />
+       }<br />
+<br />
+       public static Calculator getInstance() {<br />
+               return SingletonHolder.instance;<br />
+       }<br />
+｝<br />
+<br />
+是高级写法，这里用Java ClassLoader机制做thread safe的lazy。因为java的classloader一定是lazy且thread   <br />
+safe的，所以第一次调用到SingletonHolder的时候，classloader去初始化它，然后初始化。*jdk*保证他一定是singleton的。<br />
+<br />
+这个写法是目前最漂亮的thread safe lazy                                                     <br />
+singleton之一...难道没有人告诉你吗....下次你到office的时候帮我传达对他们的bs...<br />
+<br />
+不过如果没多multithread环境，就是多余，也不好，要自然。<br />
+</span></p>

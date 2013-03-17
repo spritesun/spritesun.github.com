@@ -1,0 +1,80 @@
+---
+layout: post
+title: Java Diary(10.2–10.5)
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p>暂时没有想好放些什么好东西上来.国庆一直在写些关于List,Stack,Queue的应用,有点心得,并从debug过程收获,先放上来,这个手稿<br />
+<br />
+Sunday, October 02, 2005<br />
+<br />
+农历二〇〇五年八月二十九<br />
+<br />
+l         JPassworField@class<br />
+Parent is JTextField<br />
+Method: setEchoChar(char) //make the character to the [char]<br />
+<br />
+l         JOptionPane@class<br />
+Method:showMessageDialog()<br />
+there is one constructor parameters table is<br />
+(Component parentComponent, Object message, String title, int messageType)<br />
+An example for the last parameter: JOptionPane.ERROR_MESSAGE<br />
+<br />
+l         setBorder(Border)@Method<br />
+An exp. for the para.:<br />
+<br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 21pt; text-indent: -21pt">l         BorderFactory.createEmptyBorder(20,20,20,20)<br />
+Factory class for vending standard Border objects. Wherever possible, this factory will hand out references to shared Border instances.<br />
+<br />
+l         createEmptyBorder@method<br />
+Creates an empty border that takes up space but which does no drawing, specifying the width of the top, left, bottom, and right sides.<br />
+Returns the Border object.<br />
+<br />
+l         char[] javax.swing.JPasswordField.getPassword()@method<br />
+Returns the text contained in this TextComponent. If the underlying document is null, will give a NullPointerException. For stronger security, it is recommended that the returned character array be cleared after use by setting each character to zero.<br />
+<br />
+l         【test setEnable for JButton】<br />
+<br />
+<br clear="all" /><br />
+<br />
+Monday, October 03, 2005<br />
+<br />
+农历二〇〇五年九月初一<br />
+<br />
+l         java.util.AbstractCollection<br />
+<br />
+</p><p class="MsoNormal" style="margin: 0cm 0cm 0pt 21pt; text-indent: -21pt">l         LinkedList@Class<br />
+Linked list implementation of the List interface. Implements all optional list operations, and permits all elements (including null). In addition to implementing the List interface, the LinkedList class provides uniformly named methods to get, remove and insert an element at the beginning and end of the list. These operations allow linked lists to be used as a stack, queue, or double-ended queue (deque).<br />
+【I’ve not catch the meaning after these words in the JDK Documentation, and will read it again on someday】<br />
+【hava some question about interface ListIterator】<br />
+<br />
+<br clear="all" /><br />
+<br />
+Tuesday, October 04, 2005<br />
+<br />
+农历二〇〇五年九月初二<br />
+<br />
+l         assert boolean_experssion: String;<br />
+jdk5.0,like this<br />
+but in the version before is Assert.notFalse(boolean_expression:String)<br />
+Assert.notNull(Object,String)<br />
+know by wanna@author<br />
+<br />
+l         ‘\r’<br />
+I found when we press “Enter”, java catch a ‘\r’ but not ‘\n’<br />
+<br />
+l         莫问前尘有悔，但求今生无愧·七剑<br />
+<br />
+<br clear="all" /><br />
+</p><p align="right">Wednesday, October 05, 2005</p><br />
+农历二〇〇五年九月初三<br />
+<br />
+l         (Object)char_expression<br />
+for (char)Object_expression is always error,so I change my way,do a (Object)char_expresiion work<br />
+<br />
+l         VERY important,\r\n<br />
+when you press enter,that’s two characters ,\r,\n<br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 21pt; text-indent: -21pt">&nbsp;</p></p>

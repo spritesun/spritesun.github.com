@@ -1,0 +1,31 @@
+---
+layout: post
+title: java中重载，覆盖，隐含概念
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">半夜写东西效率就斯高，很有感觉。买了应急灯，本本，咖啡，明白着拼命的架势咯</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">。呵呵</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span lang="EN-US"><o :p> </o></span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">预备基础：继承，超类（即父类），成员，方法，实例，构造函数。</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">参考：</span><span lang="EN-US">Java in a nutshell</span><span style="font-family: 宋体">，</span><span lang="EN-US"> 3<sup>rd</sup> version</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">主要目的就是区别一下三个名词，主要要区别重载</span><span lang="EN-US">(override)vs</span><span style="font-family: 宋体">覆盖</span><span lang="EN-US">(overwrite</span><span style="font-family: 宋体">，所以也可以叫重写</span><span lang="EN-US">)</span><span style="font-family: 宋体">，重载</span><span lang="EN-US">vs</span><span style="font-family: 宋体">隐含</span><span lang="EN-US">(Shaowing)</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span lang="EN-US"><o :p> </o></span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">重载：</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">重载是实现多态的主要途径，它要求子类具有与父类相同的函数名，但通过参数不同来区别各个子类的方法，实现同名异法的多态效果。</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">覆盖：</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">是比较常见的一个概念</span><span lang="EN-US">(</span><span style="font-family: 宋体">也的确很常用</span><span lang="EN-US">)</span><span style="font-family: 宋体">，在我们实现继承的时候，常常会对超类方法进行覆盖。</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">但这里需要明确</span><span lang="EN-US">,</span><span style="font-family: 宋体">覆盖的是超类中的实例方法，也只能覆盖实例方法。并要求具有“相同的名称，返回类型和参数”。这里要区别重载</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">覆盖的作用是，当我们通过子类的对象调用此方法的是欧，实际调用的是新方法了。</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span lang="EN-US"><o :p> </o></span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">隐含：</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">前面说到方法的覆盖，但是类方法（不是上面的实例方法）是不能覆盖，只能被其子类隐含。同样超类字段也是可以被子类隐含的（不能覆盖）。这里我注意到隐含是针对类属性的概念，因为字段＆类方法都是类本身的属性，是独立与实例对象而存在的。</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span lang="EN-US"><o :p> </o></span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">一般比较容易忽略隐含＆覆盖的区别。所以要注意两者是完全不同的概念。</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">主要区别是：</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">隐含的类方法和字段可以通过强制类型转化为超类实例来调用。但是覆盖以后的超类方法在类外部是无法获取的，在类内部可以通过</span><span lang="EN-US">super</span><span style="font-family: 宋体">关键字来获得。</span></p><br />
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt"><span style="font-family: 宋体">所以我觉得隐含＆覆盖这两个词的翻译真是相当恰如其分。隐含表示以前的还存在。覆盖了就完全代替了原来的，并将原始方法在外部除名了。但是在子类当中，覆盖方法还没有实现的时候，还是可以用</span><span lang="EN-US">super</span><span style="font-family: 宋体">来调用的。</span></p></p>

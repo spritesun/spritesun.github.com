@@ -1,0 +1,28 @@
+---
+layout: post
+title: debian/ubuntu下管理你的启动项
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p><p xmlns="http://www.w3.org/1999/xhtml"><font style="font-weight: bold" face="courier new">update-rc.d            install and remove System-V style init script links<br />
+<br />
+<br />
+<br />
+</font>每当使用aptitude install命令安装了mysql server,apache等服务器后，apt总是会执行默认的配置部署，而一般情况下，这些服务器的默认配置都是随开机自动启动的，于是久而久之，你的启动项将会越来越多，启动速度也会随之越来越慢。<br />
+<br />
+还没有感觉到缓慢的开机速度，冗长的初始化脚本吗？现在你可以通过<code>ls /etc/init.d/</code>以及<code>ls /etc/rc?.d</code>来查看当前的初始化服务。这些便是System V风格的初始化脚本的组织形式（个人感觉比~/.bashrc或者/etc/rc.local的形式更易于维护管理）<br />
+<br />
+无需ln，cp，你只用通过<strong><code>update-rc.d</code></strong>命令便可以管理init.d，包括link的remove,start,stop等等。（<font style="font-style: italic">更多请参考<code>man update-rc.d</code>）</font><br />
+<br />
+<br />
+<br />
+<font style="font-weight: bold">实例：</font><br />
+<br />
+我通过aptitude isntall命令安装了mysql5.0 server，而每次开机时它都会自动启动，而实际用到的并不多，这样以来既影响启动速度，也增加了日常运行时的任务负荷。<br />
+<br />
+于是saga建议我通过<strong><code>sudo update-rc.d -f mysqld remove</code></strong>命令将mysqld从启动项里删去了。<br />
+<br />
+以后每次使用时只要通过<code>sudo /etc/init.d/mysql start</code>来将mysql服务启动即可。</p></p>

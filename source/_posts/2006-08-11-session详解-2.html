@@ -1,0 +1,27 @@
+---
+layout: post
+title: Session详解
+categories:
+- 技艺
+tags: []
+published: true
+comments: true
+---
+<p>关于session和cookie，个人觉得实在是个比较精细的概念，之前看过sun官方<strong>SL314</strong>课程和<strong>more servlets&amp;JSP</strong>里的讲解，自己却一直理解的含含糊糊的（也许是因为英文不好的缘故），感觉它们讲解的系统性和应用针对性也不强。<br />
+<br />
+倒是在<a href="http://dev2dev.bea.com.cn/bbs/index.jspa">DEV2DEV</a>上看到一篇《Session详解》之后，茅塞顿开。正如作者说的“session机制本身并不复杂，然而其实现和配置上的灵活性却使得具体情况复杂多变。”具体还是推荐大家看看原文，还附有源代码的下载。另外虽然这篇文章发表在<strong><a href="http://www.bea.com.cn/">BEA</a>，</strong>因此具体例子主要是针对weblogic的服务器，但原理方面的通用性还是相当强。看过以后偶在tomcat上很轻松就实践了。<br />
+<br />
+<font style="background-color: #ffffff" color="#000099" size="5">原文地址：</font><br />
+<br />
+<a href="http://dev2dev.bea.com.cn/bbs/jishudata/ArticleShow.jsp?Id=10"><font style="background-color: #ffffff" color="#000099" size="5">http://dev2dev.bea.com.cn/bbs/jishudata/ArticleShow.jsp?Id=10</font></a><br />
+<br />
+这是篇论文风格很强的技术文，阅读起来基本不需要太多HTTP的基础知识，用词很严谨，没有啥岐义。（这年头IT翻译状况这么乱，很多翻译以后还是没说明白，有的就是翻译错了，还有的干脆都不翻译）<br />
+<br />
+在区别session＆cookie的时候打的一个比方甚是经典：<br />
+<br />
+<font style="background-color: #ffffff" color="#330099">笔者曾经常去的一家咖啡店有喝5杯咖啡免费赠一杯咖啡的优惠，然而一次性消费5杯咖啡的机会微乎其微，这时就需要某种方式来纪录某位顾客的消费数量。想象一下其实也无外乎下面的几种方案：<br />
+1、该店的店员很厉害，能记住每位顾客的消费数量，只要顾客一走进咖啡店，店员就知道该怎么对待了。这种做法就是协议本身支持状态。<br />
+2、发给顾客一张卡片，上面记录着消费的数量，一般还有个有效期限。每次消费时，如果顾客出示这张卡片，则此次消费就会与以前或以后的消费相联系起来。这种做法就是在客户端保持状态。<br />
+3、发给顾客一张会员卡，除了卡号之外什么信息也不纪录，每次消费时，如果顾客出示该卡片，则店员在店里的纪录本上找到这个卡号对应的纪录添加一些消费信息。这种做法就是在服务器端保持状态。</font><br />
+<br />
+嗯，session机制在More servlets&amp;JSP中servlet基础这部分是最重头戏了，好好理解对于web应用很重要！</p>

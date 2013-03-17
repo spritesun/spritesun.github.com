@@ -1,0 +1,20 @@
+---
+layout: post
+title: Goolge新搜索界面的小毛病
+categories:
+- 闲燕碎雨
+tags: []
+published: true
+comments: true
+---
+<p><p xmlns="http://www.w3.org/1999/xhtml"><a href="http://www.blogjava.net/vip01/archive/2007/04/25/113624.html">Google新搜索页面</a>公开测试了，整体界面的感觉比以前更舒服了,另外工具条确实方便了。<br />
+<br />
+试用了不到半天，感觉有一个小毛病很影响我的使用。<br />
+以前点击搜索结果，会打开一个新的页面显示选定的结果项，一般的搜索网站都是这个习惯。<br />
+而现在点击搜索结果，是在显示搜索结果的页面里打开结果项，于是<strong>搜索结果的页面就被重定向到选定的结果项</strong>了。<br />
+个人觉得这个改变还是相当影响使用的。<br />
+看了一下页面的代码，发现果然是a标签里面少了一个<font style="color: #000099"><code>target="_blank"</code></font>参数。<br />
+<br />
+不会google是故意如此的吧。。。。<br />
+似乎找不到什么理由。<br />
+应该是个bug。</p></p>
