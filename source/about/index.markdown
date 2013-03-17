@@ -9,8 +9,6 @@ comments: true
 
 iOS程序员，工作于墨尔本。
 
-特长：无。
-
 
 [My Linkedin](http://www.linkedin.com/pub/long-sun/20/159/903)
 
