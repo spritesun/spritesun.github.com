@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'sinatra/base'
+require 'open-uri'
 
 # The project root directory
 $root = ::File.dirname(__FILE__)
@@ -17,6 +18,7 @@ class SinatraStaticServer < Sinatra::Base
   def send_sinatra_file(path, &missing_file_block)
     file_path = File.join(File.dirname(__FILE__), 'public',  path)
     file_path = File.join(file_path, 'index.html') unless file_path =~ /\.[a-z]+$/i
+    file_path = URI::decode(file_path) # LOCAL SERVER HAS ENCODING ISSUE, GITHUB SERVER
     File.exist?(file_path) ? send_file(file_path) : missing_file_block.call
   end
 
