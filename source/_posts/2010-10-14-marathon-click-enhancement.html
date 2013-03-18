@@ -1,0 +1,42 @@
+---
+layout: post
+title: marathon click() enhancement
+categories:
+- 技艺
+tags:
+- java
+- marathon
+- swing
+published: true
+comments: true
+---
+<p>Marathon is an automation test tool for java swing application, but the click() method is not so readable when you want to click the cell in a JTable.</p>
+
+<p>For example,</p>
+
+<p>Here is a JTable,</p>
+
+<p>|name|size|</p>
+
+<p>|.m2|1023|</p>
+
+<p>|mate|37|</p>
+
+<p>If you want to click the row with .m2 as the name, you need code like this,</p>
+
+<p><em>click('Table', '\{0, name\}')</em></p>
+
+<p>Here, 0 means row index.</p>
+
+<p>But it will lose the business readability which is important when writing acceptance/functional test.</p>
+
+<p>If we could write code like <em>click_cell('name', '.m2'), </em>it will give much more meaning.</p>
+
+<p>Here, I gave out a primary way to enhance marathon's click() method, it's just a beginning, you could make more extension for the original marathon api certainly.</p>
+
+<p><em>def click_cell(column_name, column_val):
+</em><em> </em><em>table =  get_component('Table')</em><em>
+</em><em> </em><em>column_index = table.getColumnModel().getColumnIndex(column_name)
+</em><em> </em><em>for row_index in range(table.getRowCount()):
+</em><em> </em><em>if table.getValueAt(row_index, column_index) == column_val:
+</em><em> </em><em>click('Table', '\{\%s, \%s\}' \%(row_index, column_name))</em></p>
