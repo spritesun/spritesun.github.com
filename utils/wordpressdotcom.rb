@@ -82,7 +82,7 @@ module Jekyll
 
         type = item.at('wp:post_type').inner_text
         categories = (item/"category[@domain=category]").map{|c| c.inner_text}.reject{|c| c == 'Uncategorized'}.uniq
-        tags = (item/"category[@domain=post_tag]").map{|t| t.inner_text}.uniq
+        tags = (item/"category[@domain=tag]").map{|t| t.inner_text}.uniq
 
         name = "#{date.strftime('%Y-%m-%d')}-#{URI.decode permalink_title}.html"
         header = {
