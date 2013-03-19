@@ -4,7 +4,7 @@ title: "枕草子 感"
 date: 2013-03-19 15:47
 comments: true
 categories: 
-- Book
+- 读书
 tags:
 - 枕草子
 - 日本
