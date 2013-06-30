@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "虚云老和尚·钞"
-date: 2013-05-07 21:27
+date: 2013-06-30 21:27
 comments: true
 categories: 
 - 读书
