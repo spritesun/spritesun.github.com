@@ -6,7 +6,7 @@ comments: true
 categories: 
 - 修行日记
 tags:
-- 宗萨
+- 宗萨钦哲仁波切
 - 短期出家
 - 禅七
 - 禅三
