@@ -8,8 +8,9 @@
     {% if site.simple_search %}
     <li>
     <div id="dark">
-        <form method="get" action="{{ root_url }}/search.html" id="search">
+        <form method="get" action="{{ site.simple_search }}" id="search">
             <input name="query" type="text" placeholder="搜索..." x-webkit-speech />
+            <input type="hidden" name="q" value="site:{{ site.url | shorthand_url }}">
         </form>
     </div>
     </li>
