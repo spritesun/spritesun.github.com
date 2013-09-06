@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "佛陀的启示·钞"
-date: 2013-08-15 14:15
+date: 2013-09-06 16:31
 comments: true
 categories: 
 - 摘抄
