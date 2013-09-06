@@ -4,12 +4,12 @@ title: "生命之囚·钞"
 date: 2013-04-25 09:04
 comments: true
 categories: 
-- 修行日记
+- 摘抄
 tags:
 - 佛使比丘
 ---
 
-《生命之囚》，系佛使比丘造。原文参见， [http://math.ntnu.edu.tw/~maco/life.htm](http://math.ntnu.edu.tw/~maco/life.htm)
+《生命之囚》，系佛使比丘造。原文参见， <http://math.ntnu.edu.tw/~maco/life.htm>
 
 以下是摘选和感想。（便于整理自己的理解）
 

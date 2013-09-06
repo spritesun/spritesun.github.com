@@ -4,7 +4,7 @@ title: "药师经的济世观·钞"
 date: 2013-05-31 15:57
 comments: true
 categories: 
-- 读书
+- 摘抄
 tags:
 - 南怀瑾
 - 药师经
