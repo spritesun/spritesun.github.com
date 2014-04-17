@@ -3,7 +3,7 @@ layout: post
 title: "《当我谈跑步时，我谈些什么》·钞"
 date: 2013-11-29 11:51
 comments: true
-categories: 
+categories:
 - 摘抄
 tags:
 - 村上春树
